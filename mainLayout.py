@@ -1,4 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QWidget
+import sys
 
 
 class Ui_Dialog(object):
@@ -274,3 +276,4 @@ class Ui_Dialog(object):
         self.minImportanceLabel_2.setText(_translate("Dialog", "MIN IMPORTANCE:"))
         self.maxImportanceLabel_2.setText(_translate("Dialog", "MAX IMPORTANCE:"))
         self.synonymsLabel.setText(_translate("Dialog", "Synonyms:"))
+
