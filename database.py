@@ -54,13 +54,13 @@ class Database:
 
 
 
-
-
-
-
     def connection(self):
-        pass
-
+        db = sqlite3.connect("englishHelper.db")
+        cursor = db.cursor()
+        cursor.execute("INSERT INTO PL_ENG values (2,2)")
+        db.commit()
 
 k = Database()
+k.connection()
 #k.create_database()
+
