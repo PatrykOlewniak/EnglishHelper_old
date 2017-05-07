@@ -1,18 +1,18 @@
 import sqlite3
 
 class Database:
+    def __init__(self):
+       self.connection()
 
-    @staticmethod
-    def create_database():
+    def create_database(self):
         try:
-            db = sqlite3.connect("englishHelper.db")
-            cursor = db.cursor()
-            cursor.execute("""
+            self.cursor.execute("""
               CREATE TABLE englishWords (
                     id_ENG               INTEGER        PRIMARY KEY AUTOINCREMENT UNIQUE,
                     word                 VARCHAR (80)  NOT NULL,
                     description          VARCHAR (1024),
                     category             VARCHAR (128),
+                    example              VARCHAR (512),
                     importance           INTEGER (2)    DEFAULT (0),
                     creationDate         DATETIME       DEFAULT ( (DATETIME('now') ) ),
                     lastViewdate         DATETIME,
@@ -24,12 +24,13 @@ class Database:
                     partofspeech         VARCHAR (256));
                     """)
 
-            cursor.execute("""
+            self.cursor.execute("""
               CREATE TABLE polishWords (
                     id_PL                INTEGER        PRIMARY KEY AUTOINCREMENT UNIQUE,
                     word                 VARCHAR (80)  NOT NULL,
                     description          VARCHAR (1024),
                     category             VARCHAR (128),
+                    example              VARCHAR (512),
                     importance           INTEGER (2)    DEFAULT (0),
                     creationDate         DATETIME       DEFAULT ( (DATETIME('now') ) ),
                     lastViewdate         DATETIME,
@@ -41,26 +42,23 @@ class Database:
                     partofspeech         VARCHAR (256));
                         
                                 """)
-            cursor.execute("""
+            self.cursor.execute("""
                             CREATE TABLE PL_ENG(
                               id_PL INTEGER NOT NULL,
                               id_ENG INTEGER NOT NULL,
                               PRIMARY KEY (id_PL, id_ENG)
                             );
                                 """)
-            db.close()
+            self.db.close()
         except sqlite3.OperationalError:
             print ("Table exist")
 
 
-
     def connection(self):
-        db = sqlite3.connect("englishHelper.db")
-        cursor = db.cursor()
-        cursor.execute("INSERT INTO PL_ENG values (2,2)")
-        db.commit()
+        self.db = sqlite3.connect("englishHelper.db")
+        self.cursor = self.db.cursor()
 
-k = Database()
-k.connection()
+
+
 #k.create_database()
 
